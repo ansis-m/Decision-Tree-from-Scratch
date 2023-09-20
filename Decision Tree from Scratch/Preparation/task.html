@@ -1,0 +1,29 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Let's lay the groundwork for our future algorithm.</p>
+<p>Consider the dataset <span class="math-tex">\(D\)</span>, which contains samples from <span class="math-tex">\(n\)</span> classes. The probability of samples belonging to a class at a given node can be denoted as <span class="math-tex">\(p_i\)</span>, where <span class="math-tex">\(i\)</span> denotes the classes of the indexes. It is calculated as a simple ratio:<span class="math-tex">\[p_i = \frac{\text{number of samples that belong to the }i^{th}\:\text{class}}{\text{total number of samples in }D}\]</span><strong>Gini Impurity </strong>of<strong> <span class="math-tex">\(D\)</span> </strong>is defined as<span class="math-tex">\[Gini(D) = 1 - \sum_{i=1}^n (p_i)^2\]</span>You also need a function that counts the <strong>weighted Gini Impurity</strong>. The word<strong> </strong>"weighted" here means that it accounts for the proportion of objects in the vertices after splitting. If you split <span class="math-tex">\(D\)</span> according to the feature <span class="math-tex">\(A\)</span> into two subsets <span class="math-tex">\(D_1\)</span> and <span class="math-tex">\(D_2\)</span> with sizes <span class="math-tex">\(n_1\)</span> and <span class="math-tex">\(n_2\)</span>, respectively, the formula for weighted Gini impurity will be <span class="math-tex">\[weightedGini_A(D) = \frac{n_1}{n}Gini(D_1)+\frac{n_2}{n}Gini(D_2)\]</span></p>
+<h5 id="objectives">Objectives</h5>
+<ol>
+<li>Write a function that computes the Gini Impurity for one node. The function should take the argument as an array containing the class labels for all samples in one node and output the Gini score;</li>
+<li>Write a function that computes the weighted Gini Impurity after splitting. The function should take the arguments as two arrays containing the class labels for two child nodes and return a weighted Gini score.</li>
+</ol>
+<p></p><div class="alert alert-primary">Inside the function, round the weighted Gini score to the fifth decimal place.</div>
+<p>To complete the stage, print two results split with spaces:</p>
+<ul>
+<li>The Gini Impurity for the node <code class="java">[1,1,1,0,0,0,0,0,1,1]</code></li>
+<li>The weighted Gini Impurity for the following split: <code class="java">[1,1,1,0]</code>, <code class="java">[0,0,0,0,1,1].</code></li>
+</ul>
+<p>Round all numbers to the second decimal place for the answer (but not in the functions).</p>
+<h5 id="example">Example</h5>
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+<p><em>Input:</em></p>
+<ul>
+<li><em>The node</em>: <code class="java">[1,0,1,1,0,1,0,1,0</code><code class="java">]</code> ;</li>
+<li><em>The split:</em> <code class="java">[1,0,1,1]</code> and <code class="java">[0,1,0,1,0]</code>;</li>
+</ul>
+<p><em>Output:</em></p>
+<pre><code class="language-no-highlight">&gt; 1 0 1 1 0 1 0 1 0
+&gt; 1 0 1 1
+&gt; 0 1 0 1 0
+0.49 0.43</code></pre>
+</div>

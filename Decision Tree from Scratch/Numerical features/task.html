@@ -1,0 +1,30 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>In this stage, let's change the algorithm to consider numerical features too. First, you need to modify the splitting function from Stage 2.</p>
+<p>Recall the idea of data splitting: at the node level, you choose a feature and one of its possible values that minimize the Gini Impurity. After this, split the dataset according to this feature value (= the threshold value).</p>
+<p></p><div class="alert alert-primary">For categorical features, the process remains — all objects with the same value of the selected feature go to the left child node; others go to the right child node.
+
+<p>For numerical features, the algorithm is different: all objects where the value of the selected feature is less or equal to the threshold value go to the left child node; others go to the right child node.</p></div>
+<h5 id="objectives">Objectives</h5>
+<p>Improve the splitting function — it should take the dataset and the target variable as arguments. This function should return the minimum of weighted Gini impurity, the chosen feature, threshold, a list of left node indexes, and a list of right node indexes.</p>
+<ol>
+<li>Take the input path to the file with data;</li>
+<li>Read the data from .csv file;</li>
+<li>There are two numerical features: <code class="java">Age</code> and <code class="java">Fare</code>;</li>
+<li>The <code class="java">Survived</code> column is the target variable. Separate it from the dataset with features;</li>
+<li>Apply the splitting function to the given data and print the function's return. Round the float values to three decimal places (not in functions; only for the answer).</li>
+</ol>
+<p>If you have corrupted CSV file, please <a href="https://stepik.org/media/attachments/lesson/737408/data_stage7.csv" rel="noopener noreferrer nofollow" target="_blank">download</a> and place it in the <em>test</em> directory.</p>
+<h5 id="example">Example</h5>
+<p>The example shows the structure of the given file and the expected answer.</p>
+<p><em>Contents of </em><code class="java">data_stage7.csv</code><em> file:</em></p>
+<pre><code class="language-no-highlight">   Pclass  Sex     Fare   Age  Survived
+0       3    1  10.4625   2.0         0
+1       3    1   7.8792  19.0         1
+2       3    0   8.6625  27.0         1
+3       2    1  10.5000  50.0         1
+4       2    0  13.0000  39.0         0</code></pre>
+<p><em>Program output:</em></p>
+<pre><code class="language-no-highlight">&gt; test/data_stage7.csv
+0.267 Fare 8.662 [1, 2] [0, 3, 4]</code></pre>
+</div>

@@ -1,0 +1,12 @@
+type: framework
+content:
+- Preparation
+- Split function
+- Recursive splitting
+- Decision Tree
+- Prediction time
+- First evaluation
+- Numerical features
+- Splitting and prediction for numerical features
+- Final evaluation
+current_task: 0

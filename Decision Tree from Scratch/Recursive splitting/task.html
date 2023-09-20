@@ -1,0 +1,81 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Remember that node splitting is a recursive process. It means that you need a recursive function that calls your splitting function for each node. This recursive function works as follows:</p>
+<ol>
+<li>First, it checks whether the current node is a leaf (the conditions of a leaf node are explained below);</li>
+<li>If the node is a leaf, the function stores its label (<code class="language-python">0</code> if not survived otherwise <code class="language-python">1</code>), and the recursive process ends;</li>
+<li>If the node is not a leaf, the recursive function calls the splitting function (written in the previous stage) for the current node;</li>
+<li>The function stores the chosen feature and its threshold value;</li>
+<li>It creates the left child of the current node and stores it in the current node. The dataset for the left child node is formed using the array of the left node indexes returned by the splitting function. The indexes in the left node are reset with <code class="language-python">range(number_of_objects_in_the_left_node)</code>;</li>
+<li>The recursive function is called for the left child node;</li>
+<li>After this, the right child of the current node is created and stored in the current node. The dataset for the right child node is formed using the array of right node indexes returned by the splitting function. The indexes in the right node are reset using <code class="language-python">range(number_of_objects_in_the_right_node)</code>;</li>
+<li>The recursive function is called for the right child node.</li>
+</ol>
+<p></p><div class="alert alert-primary">A node is considered a leaf in three cases:
+
+<ol>
+<li>The amount of data in this node is less or equal to the specified minimum. In this stage, the minimum is <code class="language-python">1</code>;</li>
+<li>The Gini Impurity is <code class="language-python">0</code>;</li>
+<li>All objects (one dataset row, also known as an <strong>observation</strong>) have the same values of all features.</li></ol></div>
+<p>To complete this stage, take this <code class="language-python">Node</code> class:</p>
+<pre><code class="language-python">class Node:
+
+  def __init__(self):
+    # class initialization
+    self.left = None
+    self.right = None
+    self.term = False
+    self.label = None
+    self.feature = None
+    self.value = None
+
+  def set_split(self, feature, value):
+    # this function saves the node splitting feature and its value
+    self.feature = feature
+    self.value = value
+
+  def set_term(self, label):
+    # if the node is a leaf, this function saves its label
+    self.term = True
+    self.label = label</code></pre>
+<h5 id="objectives">Objectives</h5>
+<p>Build the recursive splitting function to set up your decision tree algorithm later. The arguments of this function are the current node (the root of the tree on the first call), the dataset, and the target variable. The recursive function doesn't return anything. Print the log messages each time a split is made. These messages will be checked during testing; the message template is in the example below.</p>
+<ol>
+<li>Take the input path to the file with data;</li>
+<li>Read the data from the <em>.csv</em> file;</li>
+<li>The <code class="language-python">Survived</code> column is the target variable. Make sure to separate it from the dataset with features;</li>
+<li>Apply the recursive function to the provided dataset. The result of the stage is a set of log messages.</li>
+</ol>
+<p>If you have corrupted CSV file, please <a href="https://stepik.org/media/attachments/lesson/737408/data_stage3.csv" rel="noopener noreferrer nofollow" target="_blank">download</a> and place it in the <em>test</em> directory.</p>
+<h5 id="example">Example</h5>
+<p>The example below shows the file structure and the expected answer.</p>
+<p><em>Contents of </em><code class="language-python">data_stage3.csv</code> <em>file:</em></p>
+<pre><code class="language-no-highlight">    Pclass  Sex  Survived
+0        3    1         0
+1        3    1         1
+2        3    0         1
+3        2    1         1
+4        2    0         0
+5        1    0         0
+6        3    0         0
+7        3    1         0
+8        1    1         1
+9        3    1         0
+10       1    1         1
+11       3    0         0
+12       2    0         0
+13       3    1         0
+14       3    1         0
+15       3    0         1
+16       1    1         1
+17       1    0         1
+18       2    0         1
+19       3    0         1</code></pre>
+<p><em>Program output:</em></p>
+<pre><code class="language-no-highlight">&gt; test/data_stage3.csv
+Made split: Pclass is 1
+Made split: Sex is 0
+Made split: Sex is 1
+Made split: Pclass is 3
+Made split: Pclass is 3</code></pre>
+</div>

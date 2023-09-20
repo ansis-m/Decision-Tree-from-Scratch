@@ -1,0 +1,64 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>The next step is to update the recursive predicting function. If the feature is numeric, compare the values for their inequality rather than equality. For a numeric feature, a sample goes to the left child node if the value of this feature is less or equal to the threshold value. If otherwise, it should go to the right child node.</p>
+<p>For categorical features, the algorithm remains the same.</p>
+<h5 id="objectives">Objectives</h5>
+<p>Firstly, incorporate the one-node-split function from the previous stage into your <code class="java">DecisionTree</code> class. You may need to add a new <code class="java">DecisionTree</code> class parameter: a list with names of numeric features. Ensure that the recursive splitting function works properly with the modified one-node-split function. Secondly, update the recursive predicting method.</p>
+<ol>
+<li>Take the input paths to two files split by a space: the first one is the training dataset, and the second one is the test dataset;</li>
+<li>Read the data from the <em>.csv</em> files</li>
+<li>There are two numerical features: <code class="java">Age</code> and <code class="java">Fare</code>;</li>
+<li>Train a decision tree on the training set. The minimum number of samples required to be at a leaf node is <code class="java">1</code> by default. The <code class="java">Survived</code> column is the target variable. Separate it from the dataset with features;</li>
+<li>Make predictions on the test set. Don't forget to separate the <code class="java">Survived</code> feature in the test set as well.</li>
+</ol>
+<p>The result of the stage is a set of log messages during the training process and prediction.</p>
+<p>If you have corrupted CSV files, please download <a href="https://stepik.org/media/attachments/lesson/737408/data_stage8_train.csv" rel="noopener noreferrer nofollow" target="_blank">training dataset</a> and <a href="https://stepik.org/media/attachments/lesson/737408/data_stage8_test.csv" rel="noopener noreferrer nofollow" target="_blank">test dataset</a>. Place them in the <em>test</em> directory.</p>
+<h5 id="example">Example</h5>
+<p>The example shows the file structure and the expected answer.</p>
+<p><em>Contents of </em><code class="java">data_stage8_train.csv</code> <em>file:</em></p>
+<pre><code class="language-no-highlight">    Pclass  Sex  SibSp  Parch   Age     Fare  Survived
+0        1    0      0      0  28.0   0.0000         0
+1        3    0      1      1   9.0  15.9000         1
+2        1    1      1      0  51.0  77.9583         1
+3        3    1      0      1   2.0  12.2875         1
+4        3    0      0      0  33.0   8.6625         0
+5        3    1      1      5  39.0  31.2750         0
+6        3    0      0      0  22.0   9.3500         0
+7        2    0      0      0  19.0  10.5000         1
+8        2    1      0      1  50.0  26.0000         1
+9        2    1      0      0  27.0  10.5000         1
+10       2    0      1      2  25.0  41.5792         0
+11       3    1      4      2   2.0  31.2750         0
+12       3    0      0      0  28.0  15.1000         0
+13       1    1      1      0  39.0  55.9000         1
+14       2    0      0      0  23.0  13.0000         0
+15       2    0      2      0  21.0  73.5000         0
+16       3    1      0      0  28.0   7.8792         1
+17       1    0      0      0  28.0  30.5000         1
+18       2    0      0      0  51.0  12.5250         0
+19       3    1      5      2  16.0  46.9000         0</code></pre>
+<p><em>Contents of </em><code class="java">data_stage8_test.csv</code> <em>file:</em></p>
+<pre><code class="language-no-highlight">   Pclass  Sex  SibSp  Parch   Age     Fare  Survived
+0       3    0      1      0  22.0   7.2500         0
+1       1    1      1      0  38.0  71.2833         1</code></pre>
+<p><em>Program output:</em></p>
+<pre><code class="language-no-highlight">&gt; test/data_stage8_train.csv test/data_stage8_test.csv
+Made split: Parch is 1
+Made split: Pclass is 1
+Made split: Fare is 0.0
+Made split: Fare is 10.5
+Made split: Pclass is 3
+Made split: Sex is 0
+Prediction for sample # 0
+   Considering decision rule on feature Parch with value 1
+   Considering decision rule on feature Pclass with value 1
+   Considering decision rule on feature Fare with value 10.5
+   Considering decision rule on feature Pclass with value 3
+   Considering decision rule on feature Sex with value 0
+   Predicted label: 0
+Prediction for sample # 1
+   Considering decision rule on feature Parch with value 1
+   Considering decision rule on feature Pclass with value 1
+   Considering decision rule on feature Fare with value 0.0
+   Predicted label: 1</code></pre>
+</div>

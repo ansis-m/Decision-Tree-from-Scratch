@@ -1,0 +1,45 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Let's set up our decision tree classifier. Create the <code class="java">DecisionTree</code> class that includes the functions you've implemented in the previous stages: the Gini and the weighted Gini Impurity, the splitting function for one node, and the recursive splitting function. Don't forget about the <code class="java">__init__()</code> method — you'll need it to store the tree's root and a value representing the minimum number of samples required at a leaf node; the default value is <code class="java">1</code>. You also need to implement the <code class="java">fit()</code> method that will allow the model's training. It takes the dataset and calls the recursive splitting function.</p>
+<p></p><div class="alert alert-primary">When constructing the <code class="java">DecisionTree</code> class, you may want to separate the methods that are meant for internal use. These methods include the Gini functions, the one-node-split function, and the recursive splitting function. <code class="java">fit()</code> is not on the list since it is used to train a model. There is a convention that a leading single underscore in a Python name of a variable/function/method, e.g.<code class="java"> _gini_impurity()</code>, indicates to a programmer that it is for internal use only.</div>
+<h5 id="objectives">Objectives</h5>
+<p>In this stage, build the <code class="java">DecisionTree</code> class based on the tips above.</p>
+<ol>
+<li>Take the input path to the file with data;</li>
+<li>Read the data from the <em>.csv</em> file;</li>
+<li>The <code class="java">Survived</code> column is the target variable. Make sure to separate it from the dataset with features;</li>
+<li>Initialize your custom decision tree and train the model on the given dataset.</li>
+</ol>
+<p>The result of the stage is a set of log messages; they were added to the recursive function in the previous stage.</p>
+<p>If you have corrupted CSV file, please <a href="https://stepik.org/media/attachments/lesson/737408/data_stage4.csv" rel="noopener noreferrer nofollow" target="_blank">download</a> and place it in the <em>test</em> directory.</p>
+<h5 id="example">Example</h5>
+<p>The example below shows the file structure and the expected answer.</p>
+<p><em>Contents of </em><code class="java">data_stage4.csv</code> <em>file:</em></p>
+<pre><code class="language-no-highlight">    Pclass  Sex  Survived
+0        1    0         0
+1        3    0         1
+2        1    1         1
+3        3    1         1
+4        3    0         0
+5        3    1         0
+6        3    0         0
+7        2    0         1
+8        2    1         1
+9        2    1         1
+10       2    0         0
+11       3    1         0
+12       3    0         0
+13       1    1         1
+14       2    0         0
+15       2    0         0
+16       3    1         1
+17       1    0         1
+18       2    0         0
+19       3    1         0</code></pre>
+<p><em>Program output:</em></p>
+<pre><code class="language-no-highlight">&gt; test/data_stage4.csv
+Made split: Sex is 0
+Made split: Pclass is 1
+Made split: Pclass is 3
+Made split: Pclass is 3</code></pre>
+</div>

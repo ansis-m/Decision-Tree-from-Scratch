@@ -1,0 +1,210 @@
+hyperskill_project:
+  id: 259
+  ide_files: https://cogniterra.org/media/attachments/lesson/26605/additional_files.json
+  is_template_based: false
+  use_ide: true
+  environment: unittest
+update_date: "Wed, 20 Sep 2023 11:06:29 UTC"
+stages:
+- id: 1307
+  step: 20209
+  is_completed: true
+- id: 1308
+  step: 20210
+  is_completed: false
+- id: 1309
+  step: 20211
+  is_completed: false
+- id: 1310
+  step: 20212
+  is_completed: false
+- id: 1311
+  step: 20213
+  is_completed: false
+- id: 1312
+  step: 20214
+  is_completed: false
+- id: 1313
+  step: 20215
+  is_completed: false
+- id: 1314
+  step: 20216
+  is_completed: false
+- id: 1315
+  step: 20217
+  is_completed: false
+topics:
+  0:
+  - title: What is math?
+    theory_id: 28537
+  - title: Applications of Math
+    theory_id: 28832
+  - title: "Math notations, formulas, and statements"
+    theory_id: 28757
+  - title: Basic concepts
+    theory_id: 26143
+  - title: Cartesian coordinates
+    theory_id: 13114
+  - title: Basics of sets
+    theory_id: 8220
+  - title: Basics of functions
+    theory_id: 8857
+  - title: Properties of functions
+    theory_id: 20683
+  - title: Computer algorithms
+    theory_id: 16547
+  - title: Sample space
+    theory_id: 7309
+  - title: Events
+    theory_id: 7892
+  - title: The concept of probability
+    theory_id: 10538
+  - title: Finding probabilities
+    theory_id: 15797
+  - title: Conditional probability
+    theory_id: 10348
+  - title: Numerical and categorical data
+    theory_id: 24686
+  - title: Properties of numerical functions
+    theory_id: 20704
+  - title: "Vectors, matrices, scalars"
+    theory_id: 16969
+  - title: Introduction to matrices
+    theory_id: 7112
+  - title: Intro to NumPy
+    theory_id: 9672
+  - title: Intro to Machine Learning
+    theory_id: 10403
+  - title: Typical ML pipeline
+    theory_id: 10411
+  - title: Introduction to regression
+    theory_id: 11417
+  - title: Introduction to classification
+    theory_id: 10942
+  - title: Array creation and indexing
+    theory_id: 10077
+  - title: Introduction to Python
+    theory_id: 5204
+  - title: Overview of the basic program
+    theory_id: 5208
+  - title: PEP 8
+    theory_id: 5879
+  - title: Comments
+    theory_id: 6081
+  - title: Load module
+    theory_id: 6019
+  - title: If statement
+    theory_id: 5953
+  - title: For loop
+    theory_id: 6065
+  - title: Else statement
+    theory_id: 5932
+  - title: While loop
+    theory_id: 5940
+  - title: Loop control statements
+    theory_id: 6302
+  - title: Methods and attributes
+    theory_id: 6981
+  - title: Pip
+    theory_id: 6230
+  - title: Taking input
+    theory_id: 5913
+  - title: Virtual Environment
+    theory_id: 13923
+  - title: Sep and end arguments of print
+    theory_id: 7452
+  - title: PyCharm basics
+    theory_id: 6193
+  - title: Class
+    theory_id: 6661
+  - title: Introduction to pandas
+    theory_id: 10416
+  - title: The Jupyter Notebook
+    theory_id: 12623
+  - title: Google Colab
+    theory_id: 12631
+  - title: Decision Trees
+    theory_id: 11426
+  - title: Gini index
+    theory_id: 21921
+  - title: Series
+    theory_id: 10421
+  - title: Running Python applications in PyCharm
+    theory_id: 19153
+  - title: Debugging Python applications in PyCharm
+    theory_id: 19163
+  - title: DataFrame
+    theory_id: 10933
+  - title: Basic data types
+    theory_id: 5852
+  - title: Variables
+    theory_id: 5859
+  - title: Invoking a function
+    theory_id: 5891
+  - title: Boolean logic
+    theory_id: 6025
+  - title: Comparisons
+    theory_id: 5920
+  - title: Declaring a function
+    theory_id: 5900
+  - title: List
+    theory_id: 5979
+  - title: Quotes and multi-line strings
+    theory_id: 5814
+  - title: Escape sequences
+    theory_id: 7130
+  - title: Arguments
+    theory_id: 7248
+  - title: Basic string methods
+    theory_id: 6842
+  - title: Split and join
+    theory_id: 6972
+  - title: Type casting
+    theory_id: 6224
+  - title: Dictionary
+    theory_id: 6481
+  - title: Indexes
+    theory_id: 6189
+  - title: Slicing
+    theory_id: 6177
+  1:
+  - title: Accessing data in a DataFrame
+    theory_id: 12998
+  - title: .loc & .iloc
+    theory_id: 13343
+  - title: Summarizing categorical columns
+    theory_id: 13351
+  2:
+  - title: Elif statement
+    theory_id: 5926
+  - title: Intro to computational thinking
+    theory_id: 8742
+  - title: Components of computational thinking
+    theory_id: 8745
+  - title: Algorithms in Python
+    theory_id: 7316
+  - title: Recursion basics
+    theory_id: 5984
+  - title: List comprehension
+    theory_id: 6315
+  - title: Functional decomposition
+    theory_id: 9571
+  - title: Recursion in Python
+    theory_id: 7665
+  4:
+  - title: Introduction to sklearn
+    theory_id: 10430
+  - title: Train and test sets
+    theory_id: 17181
+  5:
+  - title: Accuracy and confusion matrix
+    theory_id: 11245
+  6:
+  - title: Probability and Statistics
+    theory_id: 11637
+  - title: Population and sample
+    theory_id: 11274
+  - title: "Mean, median, and mode"
+    theory_id: 11282
+  - title: Summarizing numeric columns
+    theory_id: 13359

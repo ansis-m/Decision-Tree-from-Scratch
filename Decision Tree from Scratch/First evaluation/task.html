@@ -1,0 +1,58 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Cool, our model is now complete: it can learn from the known data and make predictions on new samples. But how good is it at predicting things? Let's measure the performance quality. For the evaluation, use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html" rel="noopener noreferrer nofollow" target="_blank">confusion matrix</a> from <code class="java">sklearn</code>.</p>
+<p>In this stage, you're going to need the whole Titanic dataset except the <code class="java">Age</code> and <code class="java">Fare</code> features since they are numerical. As you remember, the model can consider the categorical features only. The dataset is already split into training and test sets for you.</p>
+<p></p><div class="alert alert-primary">The problem resembles a real-world case, so you may end up with an issue called <strong>overfitting</strong>. To avoid it, set the minimum number of samples for a node to be considered a leaf to 74. So, if after a split, the number of elements in a node is less than or equal to 74 elements, that split should be the last one, and a node is considered a leaf. This tested value of 74 produces the best result on the given test set.</div>
+<h5 id="objectives">Objectives</h5>
+<ol>
+<li>Take the input paths to two files split by a space: the first one is the training dataset, and the second one is the test dataset;</li>
+<li>Read the data from the <em>.csv</em> files;</li>
+<li>Train a decision tree on the train set. Remember that the minimum number of samples for a node to be considered a leaf should be <code class="java">74</code>. This value is a parameter of the <code class="java">DecisionTree</code> class. As in the previous stages, the <code class="java">Survived</code> column is the target variable. Separate it from the dataset with features;<br/>
+<div class="alert alert-primary">When the minimum number of samples is reached and a node becomes a leaf, it should be clear how to define a leaf label. In this situation, we rely on majority voting: the leaf label is the most common class among the elements situated in the leaf.</div></li>
+<li>Make predictions on the test set. Don't forget to separate the <code class="java">Survived</code> feature in the test set as well.</li>
+<li>Given the real and predicted values of the target variable, compute a confusion matrix. </li>
+</ol>
+<p>As an answer, print true positives and true negatives normalized over the true rows and round the values to three decimal places.</p>
+<p></p><div class="alert alert-warning">Normalization over true rows shows a fraction of the correctly predicted samples of a single label over all the samples with that label. Suppose you have a dataset with 20 samples: 10 samples with label <code class="java">1</code> (<strong>positive </strong>in the language of confusion matrices) and 10 samples with label <code class="java">0</code> (<strong>negative</strong>). A confusion matrix looks as follows: true positives = <code class="java">0.6</code>, false positives = <code class="java">0.4</code>, false negatives = <code class="java">0.7</code>, true negatives = <code class="java">0.3</code>. It means that the model correctly identified the label <code class="java">1</code> in 6 out of 10 cases. For its part, the label <code class="java">0</code> was predicted correctly in 3 out of 10 cases.</div>
+<p>If you have corrupted CSV files, please download <a href="https://stepik.org/media/attachments/lesson/737408/data_stage6_train.csv" rel="noopener noreferrer nofollow" target="_blank">training dataset</a> and <a href="https://stepik.org/media/attachments/lesson/737408/data_stage6_test.csv" rel="noopener noreferrer nofollow" target="_blank">test dataset</a>. Place them in the <em>test</em> directory.</p>
+<h5 id="example">Example</h5>
+<p>The example shows the file structure and the expected answer. The minimum number of samples in a leaf is set to <code class="java">74</code>.</p>
+<p><em>Contents of </em><code class="java">data_stage6_train.csv</code><em> file:</em></p>
+<pre><code class="language-no-highlight">    Pclass  Sex  SibSp  Parch  Survived
+0        1    0      0      0         0
+1        3    0      1      1         1
+2        1    1      1      0         1
+3        3    1      0      1         1
+4        3    0      0      0         0
+5        3    1      1      5         0
+6        3    0      0      0         0
+7        2    0      0      0         1
+8        2    1      0      1         1
+9        2    1      0      0         1
+10       2    0      1      2         0
+11       3    1      4      2         0
+12       3    0      0      0         0
+13       1    1      1      0         1
+14       2    0      0      0         0
+15       2    0      2      0         0
+16       3    1      0      0         1
+17       1    0      0      0         1
+18       2    0      0      0         0
+19       3    1      5      2         0
+</code></pre>
+<p><em>Contents of </em><code class="java">data_stage6_test.csv</code> <em>file:</em></p>
+<pre><code class="language-no-highlight">   Pclass  Sex  SibSp  Parch  Survived
+0       1    1      0      0         1
+1       2    1      0      0         1
+2       3    1      0      0         1
+3       1    0      1      1         0
+4       2    1      1      1         1
+5       3    0      0      0         0
+6       2    0      0      0         0
+7       3    0      0      0         0
+8       1    1      0      1         1
+9       1    0      2      0         1</code></pre>
+<p><em>Program output:</em></p>
+<pre><code class="language-no-highlight">&gt; test/data_stage6_train.csv test/data_stage6_test.csv
+0.0 1.0</code></pre>
+</div>

@@ -1,0 +1,38 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>The recursive data splitting process in each node is the foundation for "growing" a decision tree. For now, let's work with the categorical features only.</p>
+<p>Basically, the algorithm is the following: at a node level, you get a piece of data (let's say several features with a number of rows) and then you go through all the features and through all the values of each feature. The goal is to find the feature and its value that produce the minimum weighted Gini impurity when the data is split by the value of the chosen feature.</p>
+<p>Great! You found the feature and its value that minimize Gini impurity. Then you split the dataset accordingly: all the objects (= rows of the dataset) with the same feature value go to the left child node. Others go to the right child node.</p>
+<p></p><div class="alert alert-primary">Use the Gini impurity as a splitting criterion. It shows the quality of the split and points to the feature that gives the best split. The less, the better — choose the splitting feature and its value that produces the minimum weighted Gini impurity.</div>
+<p>Starting from this stage, you will be working with a dataset containing the information on the passengers of the Titanic. The model will learn how to predict the chances of survival. Let's start with the smaller parts of the dataset. In the end, you'll take the whole dataset and train the model on it. Look at the features' description below:</p>
+<ul>
+<li><code class="java">Survived</code>: whether a person survived or not (<code class="java">0</code> = No; <code class="java">1</code> = Yes), the target variable;</li>
+<li><code class="java">Pclass</code>: the passenger class (<code class="java">1</code> = 1st; <code class="java">2</code> = 2nd; <code class="java">3</code> = 3rd);</li>
+<li><code class="java">Sex</code>: <code class="java">0</code> = Male, <code class="java">1</code> = Female;</li>
+<li><code class="java">Age</code>;</li>
+<li><code class="java">Sibsp</code>: the number of siblings/spouses aboard;</li>
+<li><code class="java">Parch</code>: the number of parents/kids aboard;</li>
+<li><code class="java">Fare</code>: the passenger fare.</li>
+</ul>
+<h5 id="objectives">Objectives</h5>
+<p>Your main objective is to compose the splitting function. It should take the dataset and the target variable as the arguments and return the minimum of the weighted Gini Impurity for the current node, the chosen feature, its chosen value, a list of the left node indexes, and a list of the right node indexes:</p>
+<ol>
+<li>Take the input path to the file with data;</li>
+<li>Read the data from a <em>.csv</em> file;</li>
+<li>The <code class="java">Survived</code> column is the target variable. Make sure to separate it from the dataset with features;</li>
+<li>Apply the splitting function to the given data and print the function output.</li>
+</ol>
+<p>If you have corrupted CSV file, please <a href="https://stepik.org/media/attachments/lesson/737408/data_stage2.csv" rel="noopener noreferrer nofollow" target="_blank">download</a> and place it in the <em>test</em> directory.</p>
+<h5 id="example">Example</h5>
+<p>The example below shows the file structure and the expected answer.</p>
+<p><em>Contents of </em><code class="java">data_stage2.csv</code> <em>file:</em></p>
+<pre><code class="language-no-highlight">   Pclass  Sex  Survived
+0       3    1         0
+1       3    1         1
+2       3    0         1
+3       2    1         1
+4       2    0         0</code></pre>
+<p><em>Program output:</em></p>
+<pre><code class="language-no-highlight">&gt; test/data_stage2.csv
+0.4667 Pclass 3 [0, 1, 2] [3, 4]</code></pre>
+</div>
