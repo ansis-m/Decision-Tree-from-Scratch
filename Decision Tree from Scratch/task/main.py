@@ -2,7 +2,7 @@ import string
 import numpy as np
 import pandas as pd
 
-FILE_PATH = ".\\test\\data_stage2.csv"
+FILE_PATH = ".\\test\\data_stage31.csv"
 
 
 def gini_impurity(array) -> float:
@@ -14,10 +14,8 @@ def gini_impurity(array) -> float:
 
 
 class Gini:
-    def __init__(self, file_path: string):
-        self.df: pd.DataFrame = pd.read_csv(file_path)
-        self.df.set_index(self.df.columns[0], inplace=True)
-        self.df.index.name = 'index'
+    def __init__(self, df: pd.DataFrame):
+        self.df: pd.DataFrame = df
         #print(self.df)
         self.outcome: pd.Series = self.df.iloc[:, -1]
         self.rows = len(self.df)
@@ -50,14 +48,20 @@ class Gini:
 
     def print_results(self):
         self._run_splitting_function()
-        print("{} {} {} {} {}".format(
-            self.result,
+        print("Made split: {} is {}".format(
             self.df.columns[self.index],
             self.value,
-            self.df[self.df.iloc[:, self.index] == self.value].index.tolist(),
-            self.df[self.df.iloc[:, self.index] != self.value].index.tolist()
-
         ))
+        left_node = self.df[self.df.iloc[:, self.index] == self.value]
+        right_node = self.df[self.df.iloc[:, self.index] != self.value]
+        if gini_impurity(left_node[left_node.columns[-1]]) != 0 and left_node.shape[0] > 1 and self.not_redundant(left_node):
+            gini_left = Gini(left_node)
+            gini_left.print_results()
+
+        if gini_impurity(right_node[right_node.columns[-1]]) != 0 and right_node.shape[0] > 1 and self.not_redundant(right_node):
+            gini_right = Gini(right_node)
+            gini_right.print_results()
+
 
     def get_weighted_gini(self, entry, column) -> float:
         matching = self.outcome[column == entry]
@@ -67,10 +71,18 @@ class Gini:
         gini_not_matching = gini_impurity(not_matching)
         return len(matching) / self.rows * gini_matching + len(not_matching) / self.rows * gini_not_matching
 
+    def not_redundant(self, left_node):
+        features = left_node.iloc[:, :-1]
+        return not (features.nunique() == 1).all()
+
 
 def main():
     FILE_PATH = input()
-    gini = Gini(FILE_PATH)
+    df = pd.read_csv(FILE_PATH)
+    df.set_index(df.columns[0], inplace=True)
+    df.index.name = 'index'
+
+    gini = Gini(df)
     gini.print_results()
 
 

@@ -56,9 +56,12 @@ files:
 
     if __name__ == '__main__':    RecSplitTest().run_tests()
   learner_created: false
-- name: test/data_stage2.csv
+- name: test/data_stage31.csv
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/259/stages/1309/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 21 Sep 2023 18:43:25 UTC"
+record: 3
