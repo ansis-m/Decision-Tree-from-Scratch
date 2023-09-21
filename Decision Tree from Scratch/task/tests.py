@@ -1,3 +1,3 @@
-from test.tests import FuncTest
+from test.tests import SplitTest
 
-if __name__ == '__main__':    FuncTest().run_tests()
+if __name__ == '__main__':    SplitTest().run_tests()
