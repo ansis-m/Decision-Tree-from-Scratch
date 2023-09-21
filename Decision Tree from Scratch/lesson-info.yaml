@@ -9,4 +9,8 @@ content:
 - Numerical features
 - Splitting and prediction for numerical features
 - Final evaluation
-current_task: 1
+<<<<<<< Updated upstream
+current_task: 0
+=======
+current_task: 2
+>>>>>>> Stashed changes

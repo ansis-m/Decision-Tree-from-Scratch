@@ -56,6 +56,9 @@ files:
 
     if __name__ == '__main__':    RecSplitTest().run_tests()
   learner_created: false
+- name: test/data_stage2.csv
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/259/stages/1309/implement#comment
 status: Unchecked
 record: -1
