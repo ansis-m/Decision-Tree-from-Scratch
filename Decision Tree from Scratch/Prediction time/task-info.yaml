@@ -84,6 +84,12 @@ files:
 - name: test/data_stage2.csv
   visible: true
   learner_created: true
+- name: Digraph.gv
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20213#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 22 Sep 2023 15:15:28 UTC"
 record: 5

@@ -60,6 +60,9 @@ files:
 - name: Digraph.gv
   visible: true
   learner_created: true
+- name: test/data_stage3.csv
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20212#comment
 status: Solved
 feedback:

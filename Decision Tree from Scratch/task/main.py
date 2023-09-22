@@ -1,19 +1,21 @@
 import numpy as np
 import pandas as pd
-from typing import Union, Tuple, List
+from typing import Union
 from graphviz import Digraph
 
-FILE_PATH = ".\\test\\data_stage31.csv"
+TRAIN_FILE_PATH = ".\\test\\data_stage5_train.csv"
+TEST_FILE_PATH = ".\\test\\data_stage5_test.csv"
 MAX_GINI = 1.0
 
 
 class DecisionNode:
     def __init__(self, feature_index: int, value: str, left: 'Union[DecisionNode, LeafNode]',
-                 right: 'Union[DecisionNode, LeafNode]'):
+                 right: 'Union[DecisionNode, LeafNode]', name:str):
         self.feature_index = feature_index
         self.value = value
         self.left = left
         self.right = right
+        self.name = name
 
 
 class LeafNode:
@@ -73,6 +75,8 @@ def construct_tree(df: pd.DataFrame):
     def parse_nodes(node):
         if gini_impurity(node[node.columns[-1]]) != 0 and node.shape[0] > 1 and not_redundant(node):
             return construct_tree(node)
+        elif len(node[node.columns[-1]].mode()) > 1:
+            return LeafNode(-1)
         else:
             return LeafNode(node[node.columns[-1]].mode()[0])
 
@@ -83,12 +87,12 @@ def construct_tree(df: pd.DataFrame):
             index = i
             value = column_value
 
-    print_results()
+    # print_results()
     left_node = df[df.iloc[:, index] == value]
     right_node = df[df.iloc[:, index] != value]
 
     left_tree, right_tree = parse_nodes(left_node), parse_nodes(right_node)
-    return DecisionNode(index, value, left_tree, right_tree)
+    return DecisionNode(index, value, left_tree, right_tree, df.columns[index])
 
 
 def visualize_tree(node, df, parent_name='', graph=None):
@@ -107,15 +111,33 @@ def visualize_tree(node, df, parent_name='', graph=None):
     return graph
 
 
+def predict(row, node, index):
+    if index != -1:
+        print("Prediction for sample # {}".format(index))
+    if isinstance(node, LeafNode):
+        print("\tPredicted label: {}".format(node.prediction))
+    elif row.iloc[node.feature_index] == node.value:
+        print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
+        predict(row, node.left, -1)
+    else:
+        print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
+        predict(row, node.right, -1)
+
+
 def main():
-    FILE_PATH = input()
-    df = pd.read_csv(FILE_PATH)
+    TRAIN_FILE_PATH, TEST_FILE_PATH = input().split(" ")
+    df = pd.read_csv(TRAIN_FILE_PATH)
     df.set_index(df.columns[0], inplace=True)
     df.index.name = 'index'
     tree: DecisionNode = construct_tree(df)
-    #graph = visualize_tree(tree, df)
-    #graph.view()
 
+
+    test_df: pd.DataFrame = pd.read_csv(TEST_FILE_PATH)
+    test_df.set_index(test_df.columns[0], inplace=True)
+    test_df.apply(lambda row: predict(row, tree, row.name), axis=1)
+
+    # graph = visualize_tree(tree, df)
+    # graph.view()
 
 if __name__ == "__main__":
     main()

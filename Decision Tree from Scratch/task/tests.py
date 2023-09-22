@@ -1,3 +1,3 @@
-from test.tests import TreeTest
+from test.tests import TreePredTest
 
-if __name__ == '__main__':    TreeTest().run_tests()
+if __name__ == '__main__':    TreePredTest().run_tests()
