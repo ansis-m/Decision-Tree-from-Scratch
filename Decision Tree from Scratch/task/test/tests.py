@@ -1,29 +1,53 @@
 from hstest import *
 
 
-ANSWER = ["Made split: Sex is 0", "Made split: Pclass is 2",
-          "Made split: Pclass is 1", "Made split: Pclass is 3"]
+ANSWER = ['Prediction for sample # 0',
+          'Considering decision rule on feature Sex with value 0',
+          'Considering decision rule on feature SibSp with value 0',
+          'Considering decision rule on feature Pclass with value 3',
+          'Considering decision rule on feature Parch with value 0',
+          'Predicted label: 1',
+          'Prediction for sample # 1',
+          'Considering decision rule on feature Sex with value 0',
+          'Considering decision rule on feature Pclass with value 2',
+          'Considering decision rule on feature Parch with value 1',
+          'Considering decision rule on feature SibSp with value 0',
+          'Considering decision rule on feature Pclass with value 3',
+          'Predicted label: 0']
 
 
-class TreeTest(StageTest):
+class TreePredTest(StageTest):
 
     @dynamic_test
     def test(self):
         pr = TestedProgram()
         pr.start()
         if not pr.is_waiting_input():
-            raise WrongAnswer("You program should input the path to the file")
-        output = pr.execute("test/data_stage4.csv").strip()
+            raise WrongAnswer("You program should input two paths to the files split by space")
+        output = pr.execute("test/data_stage5_train.csv test/data_stage5_test.csv").strip()
         res = output.split("\n")
         res = [x.strip() for x in res]
-        if len(res) != 4:
-            raise WrongAnswer("Wrong number of splits. Your model should make a split four times (on given data).")
-        for i in range(4):
+        if len(res) != 13:
+            raise WrongAnswer("Wrong number of log messages.\n"
+                              "Your model should visit four internal nodes making prediction for the first sample\n"
+                              "and five internal nodes making prediction for the second sample.\n"
+                              "Do not forget to add log messages showing the number of sample and its predicted label.")
+        for i in range(1, 13):
+            if i == 6:
+                continue
             if res[i] != ANSWER[i]:
-                raise WrongAnswer(f"Wrong log message on line {i+1}. Correct message template: 'Made split: Sex is 1'."
-                                  "\nIt may be useful to check the traversal order in the recursive split function: go to the left child first.")
+                if i == 5:
+                    raise WrongAnswer("Wrong prediction for the first sample."
+                                      "\nCorrect message template: 'Predicted label: 0'.")
+                elif i == 12:
+                    raise WrongAnswer("Wrong prediction for the second sample."
+                                      "\nCorrect message template: 'Predicted label: 0'.")
+                else:
+                    raise WrongAnswer(f"Wrong log message on line {i+1}."
+                                      "\nIt may be useful to check the traversal order in the recursive split function: go to the left child first."
+                                      "\nCorrect message template: 'Considering decision rule on feature Sex with value 1'.")
         return CheckResult.correct()
 
 
 if __name__ == '__main__':
-    TreeTest().run_tests()
+    TreePredTest().run_tests()
