@@ -104,6 +104,6 @@ files:
 
     if __name__ == '__main__':    TreeNumTest().run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/259/stages/1314/implement#comment
+feedback_link: https://hyperskill.org/learn/step/20216#comment
 status: Unchecked
 record: -1

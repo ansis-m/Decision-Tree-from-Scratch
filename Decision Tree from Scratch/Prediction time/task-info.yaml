@@ -78,6 +78,12 @@ files:
 
     if __name__ == '__main__':    TreePredTest().run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/259/stages/1311/implement#comment
+- name: test/data_stage31.csv
+  visible: true
+  learner_created: true
+- name: test/data_stage2.csv
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/20213#comment
 status: Unchecked
-record: -1
+record: 5

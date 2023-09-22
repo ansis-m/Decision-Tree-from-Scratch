@@ -56,6 +56,6 @@ files:
 
     if __name__ == '__main__':    Eval2Test().run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/259/stages/1315/implement#comment
+feedback_link: https://hyperskill.org/learn/step/20217#comment
 status: Unchecked
 record: -1

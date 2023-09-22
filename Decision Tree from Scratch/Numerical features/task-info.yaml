@@ -86,6 +86,6 @@ files:
 
     if __name__ == '__main__':    SplitNumTest().run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/259/stages/1313/implement#comment
+feedback_link: https://hyperskill.org/learn/step/20215#comment
 status: Unchecked
 record: -1

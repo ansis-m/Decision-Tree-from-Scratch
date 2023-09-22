@@ -1,3 +1,3 @@
-from test.tests import RecSplitTest
+from test.tests import TreeTest
 
-if __name__ == '__main__':    RecSplitTest().run_tests()
+if __name__ == '__main__':    TreeTest().run_tests()

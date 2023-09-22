@@ -1,11 +1,27 @@
 import numpy as np
 import pandas as pd
+from typing import Union, Tuple, List
+from graphviz import Digraph
 
 FILE_PATH = ".\\test\\data_stage31.csv"
 MAX_GINI = 1.0
 
 
-def gini_impurity(array) -> float:
+class DecisionNode:
+    def __init__(self, feature_index: int, value: str, left: 'Union[DecisionNode, LeafNode]',
+                 right: 'Union[DecisionNode, LeafNode]'):
+        self.feature_index = feature_index
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+class LeafNode:
+    def __init__(self, prediction: int):
+        self.prediction = prediction
+
+
+def gini_impurity(array: pd.Series) -> float:
     array_len = len(array)
     if array_len == 0:
         return 0
@@ -13,8 +29,13 @@ def gini_impurity(array) -> float:
     return 1 - (array_sum / array_len) ** 2 - (1 - array_sum / array_len) ** 2
 
 
+def not_redundant(node: pd.DataFrame) -> bool:
+    features = node.iloc[:, :-1]
+    return not (features.nunique() == 1).all()
+
+
 def construct_tree(df: pd.DataFrame):
-    #print(df)
+    # print(df)
     outcome: pd.Series = df.iloc[:, -1]
     rows = len(df)
     gini = MAX_GINI
@@ -49,9 +70,11 @@ def construct_tree(df: pd.DataFrame):
         gini_not_matching = gini_impurity(not_matching)
         return len(matching) / rows * gini_matching + len(not_matching) / rows * gini_not_matching
 
-    def not_redundant(left_node):
-        features = left_node.iloc[:, :-1]
-        return not (features.nunique() == 1).all()
+    def parse_nodes(node):
+        if gini_impurity(node[node.columns[-1]]) != 0 and node.shape[0] > 1 and not_redundant(node):
+            return construct_tree(node)
+        else:
+            return LeafNode(node[node.columns[-1]].mode()[0])
 
     for i in range(0, df.shape[1] - 1):
         column_gini, column_value = _best_weighted_gini_for_column(i)
@@ -63,11 +86,25 @@ def construct_tree(df: pd.DataFrame):
     print_results()
     left_node = df[df.iloc[:, index] == value]
     right_node = df[df.iloc[:, index] != value]
-    if gini_impurity(left_node[left_node.columns[-1]]) != 0 and left_node.shape[0] > 1 and not_redundant(left_node):
-        construct_tree(left_node)
-    if gini_impurity(right_node[right_node.columns[-1]]) != 0 and right_node.shape[0] > 1 and not_redundant(
-        right_node):
-        construct_tree(right_node)
+
+    left_tree, right_tree = parse_nodes(left_node), parse_nodes(right_node)
+    return DecisionNode(index, value, left_tree, right_tree)
+
+
+def visualize_tree(node, df, parent_name='', graph=None):
+    if graph is None:
+        graph = Digraph()
+
+    if isinstance(node, LeafNode):
+        graph.node(f'{id(node)}', label=f"Prediction: {node.prediction}")
+    else:
+        graph.node(f'{id(node)}', label=f"Feature {df.columns[node.feature_index]} == {node.value}?")
+        visualize_tree(node.left, df, f'{id(node)}', graph)
+        graph.edge(f'{id(node)}', f'{id(node.left)}', label='True')
+        visualize_tree(node.right, df, f'{id(node)}', graph)
+        graph.edge(f'{id(node)}', f'{id(node.right)}', label='False')
+
+    return graph
 
 
 def main():
@@ -75,7 +112,9 @@ def main():
     df = pd.read_csv(FILE_PATH)
     df.set_index(df.columns[0], inplace=True)
     df.index.name = 'index'
-    construct_tree(df)
+    tree: DecisionNode = construct_tree(df)
+    #graph = visualize_tree(tree, df)
+    #graph.view()
 
 
 if __name__ == "__main__":

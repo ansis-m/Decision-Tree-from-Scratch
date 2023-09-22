@@ -62,7 +62,7 @@ files:
 - name: test/data_stage2.csv
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/projects/259/stages/1309/implement#comment
+feedback_link: https://hyperskill.org/learn/step/20211#comment
 status: Solved
 feedback:
   message: Congratulations!
