@@ -59,9 +59,12 @@ files:
 - name: test/data_stage31.csv
   visible: true
   learner_created: true
+- name: test/data_stage2.csv
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/259/stages/1309/implement#comment
 status: Solved
 feedback:
   message: Congratulations!
-  time: "Thu, 21 Sep 2023 18:43:25 UTC"
+  time: "Fri, 22 Sep 2023 09:32:05 UTC"
 record: 3

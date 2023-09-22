@@ -1,4 +1,3 @@
-import string
 import numpy as np
 import pandas as pd
 
@@ -13,67 +12,62 @@ def gini_impurity(array) -> float:
     return 1 - (array_sum / array_len) ** 2 - (1 - array_sum / array_len) ** 2
 
 
-class Gini:
-    def __init__(self, df: pd.DataFrame):
-        self.df: pd.DataFrame = df
-        #print(self.df)
-        self.outcome: pd.Series = self.df.iloc[:, -1]
-        self.rows = len(self.df)
-        self.result = 1
-        self.index = -1
-        self.value = ""
+def construct_tree(df: pd.DataFrame):
+    #print(df)
+    outcome: pd.Series = df.iloc[:, -1]
+    rows = len(df)
+    gini = 1
+    index = -1
+    value = ""
 
-    def _run_splitting_function(self):
-        for i in range(0, self.df.shape[1] - 1):
-            gini, value = self._best_weighted_gini_for_column(i)
-            if gini < self.result:
-                self.result = gini
-                self.index = i
-                self.value = value
-        return self
-
-    def _best_weighted_gini_for_column(self, index: int) -> tuple:
-        column: pd.Series = self.df.iloc[:, index]
-        result: float = 1.0
-        value: string = ""
+    def _best_weighted_gini_for_column(index: int) -> tuple:
+        column: pd.Series = df.iloc[:, index]
+        column_result: float = 1.0
+        column_value: str = ""
         unique = column.unique()
 
         for entry in unique:
-            this_result = self.get_weighted_gini(entry, column)
-            if this_result < result:
-                result = this_result
-                value = entry
+            this_result = get_weighted_gini(entry, column)
+            if this_result < column_result:
+                column_result = this_result
+                column_value = entry
 
-        return result, value
+        return column_result, column_value
 
-    def print_results(self):
-        self._run_splitting_function()
+    def print_results():
         print("Made split: {} is {}".format(
-            self.df.columns[self.index],
-            self.value,
+            df.columns[index],
+            value,
         ))
-        left_node = self.df[self.df.iloc[:, self.index] == self.value]
-        right_node = self.df[self.df.iloc[:, self.index] != self.value]
-        if gini_impurity(left_node[left_node.columns[-1]]) != 0 and left_node.shape[0] > 1 and self.not_redundant(left_node):
-            gini_left = Gini(left_node)
-            gini_left.print_results()
+        left_node = df[df.iloc[:, index] == value]
+        right_node = df[df.iloc[:, index] != value]
+        if gini_impurity(left_node[left_node.columns[-1]]) != 0 and left_node.shape[0] > 1 and not_redundant(left_node):
+            construct_tree(left_node)
 
-        if gini_impurity(right_node[right_node.columns[-1]]) != 0 and right_node.shape[0] > 1 and self.not_redundant(right_node):
-            gini_right = Gini(right_node)
-            gini_right.print_results()
+        if gini_impurity(right_node[right_node.columns[-1]]) != 0 and right_node.shape[0] > 1 and not_redundant(
+                right_node):
+            construct_tree(right_node)
 
-
-    def get_weighted_gini(self, entry, column) -> float:
-        matching = self.outcome[column == entry]
-        not_matching = self.outcome[column != entry]
+    def get_weighted_gini(entry, column) -> float:
+        matching = outcome[column == entry]
+        not_matching = outcome[column != entry]
 
         gini_matching = gini_impurity(matching)
         gini_not_matching = gini_impurity(not_matching)
-        return len(matching) / self.rows * gini_matching + len(not_matching) / self.rows * gini_not_matching
+        return len(matching) / rows * gini_matching + len(not_matching) / rows * gini_not_matching
 
-    def not_redundant(self, left_node):
+    def not_redundant(left_node):
         features = left_node.iloc[:, :-1]
         return not (features.nunique() == 1).all()
+
+    for i in range(0, df.shape[1] - 1):
+        column_gini, column_value = _best_weighted_gini_for_column(i)
+        if column_gini < gini:
+            gini = column_gini
+            index = i
+            value = column_value
+
+    print_results()
 
 
 def main():
@@ -81,9 +75,7 @@ def main():
     df = pd.read_csv(FILE_PATH)
     df.set_index(df.columns[0], inplace=True)
     df.index.name = 'index'
-
-    gini = Gini(df)
-    gini.print_results()
+    construct_tree(df)
 
 
 if __name__ == "__main__":
