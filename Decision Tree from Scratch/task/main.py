@@ -1,11 +1,8 @@
 import numpy as np
 import pandas as pd
 from typing import Union
-from graphviz import Digraph
-from sklearn.metrics import confusion_matrix
 
 TRAIN_FILE_PATH = ".\\test\\data_stage7.csv"
-TEST_FILE_PATH = ".\\test\\data_stage6_test.csv"
 MAX_GINI = 1.0
 MINIMUM_SAMPLES = 74
 
@@ -40,7 +37,6 @@ def not_redundant(node: pd.DataFrame) -> bool:
 
 
 def construct_tree(df: pd.DataFrame):
-    # print(df)
     outcome: pd.Series = df.iloc[:, -1]
     rows = len(df)
     gini = MAX_GINI
@@ -61,12 +57,6 @@ def construct_tree(df: pd.DataFrame):
 
         return column_gini, column_value
 
-    def print_results():
-        print("Made split: {} is {}".format(
-            df.columns[index],
-            value,
-        ))
-
     def get_weighted_gini(entry, column, float_type=False) -> float:
         if float_type:
             matching = outcome[column <= entry]
@@ -82,8 +72,6 @@ def construct_tree(df: pd.DataFrame):
     def parse_nodes(node):
         if gini_impurity(node[node.columns[-1]]) != 0 and node.shape[0] > MINIMUM_SAMPLES and not_redundant(node):
             return construct_tree(node)
-        # elif len(node[node.columns[-1]].mode()) > 1:
-        #     return LeafNode(-1)
         else:
             return LeafNode(node[node.columns[-1]].mode()[0])
 
@@ -94,7 +82,6 @@ def construct_tree(df: pd.DataFrame):
             index = i
             value = column_value
 
-    # print_results()
     left_node = df[df.iloc[:, index] == value]
     right_node = df[df.iloc[:, index] != value]
 
@@ -102,54 +89,12 @@ def construct_tree(df: pd.DataFrame):
     return DecisionNode(index, value, left_tree, right_tree, df.columns[index], gini)
 
 
-def visualize_tree(node, df, parent_name='', graph=None):
-    if graph is None:
-        graph = Digraph()
-
-    if isinstance(node, LeafNode):
-        graph.node(f'{id(node)}', label=f"Prediction: {node.prediction}")
-    else:
-        graph.node(f'{id(node)}', label=f"Feature {df.columns[node.feature_index]} == {node.value}?")
-        visualize_tree(node.left, df, f'{id(node)}', graph)
-        graph.edge(f'{id(node)}', f'{id(node.left)}', label='True')
-        visualize_tree(node.right, df, f'{id(node)}', graph)
-        graph.edge(f'{id(node)}', f'{id(node.right)}', label='False')
-
-    return graph
-
-
-def predict(row, node, index):
-    if index != -1:
-        pass
-        # print("Prediction for sample # {}".format(index))
-    if isinstance(node, LeafNode):
-        # print("\tPredicted label: {}".format(node.prediction))
-        return node.prediction
-    elif row.iloc[node.feature_index] == node.value:
-        # print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
-        return predict(row, node.left, -1)
-    else:
-        # print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
-        return predict(row, node.right, -1)
-
-
 def main():
-    # TRAIN_FILE_PATH, TEST_FILE_PATH = input().split(" ")
     TRAIN_FILE_PATH = input()
     df = pd.read_csv(TRAIN_FILE_PATH)
     df.set_index(df.columns[0], inplace=True)
     df.index.name = 'index'
-    # print(df)
     tree: DecisionNode = construct_tree(df)
-
-    # test_df: pd.DataFrame = pd.read_csv(TEST_FILE_PATH)
-    # test_df.set_index(test_df.columns[0], inplace=True)
-    # predictions = test_df.apply(lambda row: predict(row, tree, row.name), axis=1)
-    # outcome: pd.Series = test_df.iloc[:, -1]
-    #
-    #
-    # matrix = confusion_matrix(outcome, predictions)
-    # print(round(matrix[1][1]/(matrix[1][0] + matrix[1][1]), 3), round(matrix[0][0]/(matrix[0][0] + matrix[0][1]), 3))
 
     print("{} {} {} {} {}".format(
         round(tree.gini, 3),
@@ -157,9 +102,6 @@ def main():
         tree.value,
         df[df.iloc[:, tree.feature_index] <= tree.value].index.tolist() if isinstance(tree.value, float) else df[df.iloc[:, tree.feature_index] == tree.value].index.tolist(),
         df[df.iloc[:, tree.feature_index] > tree.value].index.tolist() if isinstance(tree.value, float) else df[df.iloc[:, tree.feature_index] != tree.value].index.tolist()))
-
-    # graph = visualize_tree(tree, df)
-    # graph.view()
 
 
 if __name__ == "__main__":
