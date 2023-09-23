@@ -4,7 +4,7 @@ from typing import Union
 from graphviz import Digraph
 from sklearn.metrics import confusion_matrix
 
-TRAIN_FILE_PATH = ".\\test\\data_stage6_train.csv"
+TRAIN_FILE_PATH = ".\\test\\data_stage7.csv"
 TEST_FILE_PATH = ".\\test\\data_stage6_test.csv"
 MAX_GINI = 1.0
 MINIMUM_SAMPLES = 74
@@ -12,7 +12,8 @@ MINIMUM_SAMPLES = 74
 
 class DecisionNode:
     def __init__(self, feature_index: int, value: str, left: 'Union[DecisionNode, LeafNode]',
-                 right: 'Union[DecisionNode, LeafNode]', name:str):
+                 right: 'Union[DecisionNode, LeafNode]', name: str, gini: float):
+        self.gini = gini
         self.feature_index = feature_index
         self.value = value
         self.left = left
@@ -53,7 +54,7 @@ def construct_tree(df: pd.DataFrame):
         unique = column.unique()
 
         for entry in unique:
-            this_gini = get_weighted_gini(entry, column)
+            this_gini = get_weighted_gini(entry, column, column.dtype == 'float64')
             if this_gini < column_gini:
                 column_gini = this_gini
                 column_value = entry
@@ -66,9 +67,13 @@ def construct_tree(df: pd.DataFrame):
             value,
         ))
 
-    def get_weighted_gini(entry, column) -> float:
-        matching = outcome[column == entry]
-        not_matching = outcome[column != entry]
+    def get_weighted_gini(entry, column, float_type=False) -> float:
+        if float_type:
+            matching = outcome[column <= entry]
+            not_matching = outcome[column > entry]
+        else:
+            matching = outcome[column == entry]
+            not_matching = outcome[column != entry]
 
         gini_matching = gini_impurity(matching)
         gini_not_matching = gini_impurity(not_matching)
@@ -94,7 +99,7 @@ def construct_tree(df: pd.DataFrame):
     right_node = df[df.iloc[:, index] != value]
 
     left_tree, right_tree = parse_nodes(left_node), parse_nodes(right_node)
-    return DecisionNode(index, value, left_tree, right_tree, df.columns[index])
+    return DecisionNode(index, value, left_tree, right_tree, df.columns[index], gini)
 
 
 def visualize_tree(node, df, parent_name='', graph=None):
@@ -129,26 +134,33 @@ def predict(row, node, index):
 
 
 def main():
-    TRAIN_FILE_PATH, TEST_FILE_PATH = input().split(" ")
+    # TRAIN_FILE_PATH, TEST_FILE_PATH = input().split(" ")
+    TRAIN_FILE_PATH = input()
     df = pd.read_csv(TRAIN_FILE_PATH)
     df.set_index(df.columns[0], inplace=True)
     df.index.name = 'index'
     # print(df)
     tree: DecisionNode = construct_tree(df)
 
+    # test_df: pd.DataFrame = pd.read_csv(TEST_FILE_PATH)
+    # test_df.set_index(test_df.columns[0], inplace=True)
+    # predictions = test_df.apply(lambda row: predict(row, tree, row.name), axis=1)
+    # outcome: pd.Series = test_df.iloc[:, -1]
+    #
+    #
+    # matrix = confusion_matrix(outcome, predictions)
+    # print(round(matrix[1][1]/(matrix[1][0] + matrix[1][1]), 3), round(matrix[0][0]/(matrix[0][0] + matrix[0][1]), 3))
 
-    test_df: pd.DataFrame = pd.read_csv(TEST_FILE_PATH)
-    test_df.set_index(test_df.columns[0], inplace=True)
-    predictions = test_df.apply(lambda row: predict(row, tree, row.name), axis=1)
-    outcome: pd.Series = test_df.iloc[:, -1]
-
-
-    matrix = confusion_matrix(outcome, predictions)
-    print(round(matrix[1][1]/(matrix[1][0] + matrix[1][1]), 3), round(matrix[0][0]/(matrix[0][0] + matrix[0][1]), 3))
-
+    print("{} {} {} {} {}".format(
+        round(tree.gini, 3),
+        tree.name,
+        tree.value,
+        df[df.iloc[:, tree.feature_index] <= tree.value].index.tolist() if isinstance(tree.value, float) else df[df.iloc[:, tree.feature_index] == tree.value].index.tolist(),
+        df[df.iloc[:, tree.feature_index] > tree.value].index.tolist() if isinstance(tree.value, float) else df[df.iloc[:, tree.feature_index] != tree.value].index.tolist()))
 
     # graph = visualize_tree(tree, df)
     # graph.view()
+
 
 if __name__ == "__main__":
     main()

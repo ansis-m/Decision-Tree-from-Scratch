@@ -86,6 +86,47 @@ files:
 
     if __name__ == '__main__':    SplitNumTest().run_tests()
   learner_created: false
+- name: test/data_stage31.csv
+  visible: true
+  learner_created: true
+- name: test/data_stage2.csv
+  visible: true
+  learner_created: true
+- name: Digraph.gv
+  visible: true
+  text: "digraph {\n\t2315927277632 [label=\"Feature Sex == 0?\"]\n\t2315927561072\
+    \ [label=\"Feature Pclass == 1?\"]\n\t2315927563616 [label=\"Feature Parch ==\
+    \ 2?\"]\n\t2315927560352 [label=\"Prediction: 1\"]\n\t2315927563616 -> 2315927560352\
+    \ [label=True]\n\t2315927669248 [label=\"Feature SibSp == 0?\"]\n\t2315927667472\
+    \ [label=\"Prediction: 0\"]\n\t2315927669248 -> 2315927667472 [label=True]\n\t\
+    2315927668576 [label=\"Prediction: 0\"]\n\t2315927669248 -> 2315927668576 [label=False]\n\
+    \t2315927563616 -> 2315927669248 [label=False]\n\t2315927561072 -> 2315927563616\
+    \ [label=True]\n\t2315927667712 [label=\"Feature Parch == 1?\"]\n\t2315927562944\
+    \ [label=\"Prediction: 0\"]\n\t2315927667712 -> 2315927562944 [label=True]\n\t\
+    2315927670016 [label=\"Feature Parch == 2?\"]\n\t2315927668288 [label=\"Prediction:\
+    \ 0\"]\n\t2315927670016 -> 2315927668288 [label=True]\n\t2315927697248 [label=\"\
+    Feature Pclass == 3?\"]\n\t2315927733488 [label=\"Feature Parch == 0?\"]\n\t2315927735408\
+    \ [label=\"Feature SibSp == 0?\"]\n\t2315927734736 [label=\"Prediction: 0\"]\n\
+    \t2315927735408 -> 2315927734736 [label=True]\n\t2315927734640 [label=\"Prediction:\
+    \ 0\"]\n\t2315927735408 -> 2315927734640 [label=False]\n\t2315927733488 -> 2315927735408\
+    \ [label=True]\n\t2315927699168 [label=\"Prediction: 0\"]\n\t2315927733488 ->\
+    \ 2315927699168 [label=False]\n\t2315927697248 -> 2315927733488 [label=True]\n\
+    \t2315927696864 [label=\"Prediction: 0\"]\n\t2315927697248 -> 2315927696864 [label=False]\n\
+    \t2315927670016 -> 2315927697248 [label=False]\n\t2315927667712 -> 2315927670016\
+    \ [label=False]\n\t2315927561072 -> 2315927667712 [label=False]\n\t2315927277632\
+    \ -> 2315927561072 [label=True]\n\t2315927563664 [label=\"Feature Pclass == 3?\"\
+    ]\n\t2315927668528 [label=\"Feature SibSp == 0?\"]\n\t2315927561600 [label=\"\
+    Prediction: 1\"]\n\t2315927668528 -> 2315927561600 [label=True]\n\t2315927668624\
+    \ [label=\"Prediction: 0\"]\n\t2315927668528 -> 2315927668624 [label=False]\n\t\
+    2315927563664 -> 2315927668528 [label=True]\n\t2315927670064 [label=\"Feature\
+    \ Pclass == 2?\"]\n\t2315927667808 [label=\"Prediction: 1\"]\n\t2315927670064\
+    \ -> 2315927667808 [label=True]\n\t2315927667184 [label=\"Prediction: 1\"]\n\t\
+    2315927670064 -> 2315927667184 [label=False]\n\t2315927563664 -> 2315927670064\
+    \ [label=False]\n\t2315927277632 -> 2315927563664 [label=False]\n}\n"
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20215#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 23 Sep 2023 10:11:02 UTC"
 record: -1

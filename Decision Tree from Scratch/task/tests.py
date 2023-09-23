@@ -1,3 +1,3 @@
-from test.tests import Eval1Test
+from test.tests import SplitNumTest
 
-if __name__ == '__main__':    Eval1Test().run_tests()
+if __name__ == '__main__':    SplitNumTest().run_tests()
