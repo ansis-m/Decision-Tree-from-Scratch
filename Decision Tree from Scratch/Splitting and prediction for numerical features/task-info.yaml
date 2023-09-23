@@ -104,6 +104,22 @@ files:
 
     if __name__ == '__main__':    TreeNumTest().run_tests()
   learner_created: false
+- name: test/data_stage31.csv
+  visible: true
+  learner_created: true
+- name: test/data_stage2.csv
+  visible: true
+  learner_created: true
+- name: Digraph.gv
+  visible: true
+  text: "digraph {\n\t2452526336560 [label=\"Feature Fare == 8.6625?\"]\n\t2452526337712\
+    \ [label=\"Prediction: 1\"]\n\t2452526336560 -> 2452526337712 [label=True]\n\t\
+    2452526337520 [label=\"Prediction: 0\"]\n\t2452526336560 -> 2452526337520 [label=False]\n\
+    }\n"
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20216#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sat, 23 Sep 2023 11:11:40 UTC"
 record: -1
