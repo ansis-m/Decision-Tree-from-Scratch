@@ -56,6 +56,76 @@ files:
 
     if __name__ == '__main__':    Eval2Test().run_tests()
   learner_created: false
+- name: test/data_stage31.csv
+  visible: true
+  learner_created: true
+- name: test/data_stage2.csv
+  visible: true
+  learner_created: true
+- name: Digraph.gv
+  visible: true
+  text: "digraph {\n\t2368741402848 [label=\"Feature Sex == 0?\"]\n\t2368741642544\
+    \ [label=\"Feature Age == 0.83?\"]\n\t2368741403904 [label=\"Prediction: 1\"]\n\
+    \t2368741642544 -> 2368741403904 [label=True]\n\t2368741644800 [label=\"Feature\
+    \ Fare == 9.0?\"]\n\t2368741705088 [label=\"Feature Fare == 7.2292?\"]\n\t2368741705904\
+    \ [label=\"Feature Age == 28.0?\"]\n\t2368741707584 [label=\"Feature Age == 22.0?\"\
+    ]\n\t2368741707296 [label=\"Prediction: 0\"]\n\t2368741707584 -> 2368741707296\
+    \ [label=True]\n\t2368741739248 [label=\"Feature Fare == 7.225?\"]\n\t2368741737712\
+    \ [label=\"Prediction: 0\"]\n\t2368741739248 -> 2368741737712 [label=True]\n\t\
+    2368741737520 [label=\"Prediction: 1\"]\n\t2368741739248 -> 2368741737520 [label=False]\n\
+    \t2368741707584 -> 2368741739248 [label=False]\n\t2368741705904 -> 2368741707584\
+    \ [label=True]\n\t2368741706624 [label=\"Prediction: 0\"]\n\t2368741705904 ->\
+    \ 2368741706624 [label=False]\n\t2368741705088 -> 2368741705904 [label=True]\n\
+    \t2368741704512 [label=\"Prediction: 0\"]\n\t2368741705088 -> 2368741704512 [label=False]\n\
+    \t2368741644800 -> 2368741705088 [label=True]\n\t2368741706096 [label=\"Feature\
+    \ SibSp == 0?\"]\n\t2368741707536 [label=\"Feature Age == 34.0?\"]\n\t2368741737904\
+    \ [label=\"Feature Age == 21.0?\"]\n\t2368741736992 [label=\"Prediction: 0\"]\n\
+    \t2368741737904 -> 2368741736992 [label=True]\n\t2368741740064 [label=\"Feature\
+    \ Pclass == 3?\"]\n\t2368741739920 [label=\"Prediction: 1\"]\n\t2368741740064\
+    \ -> 2368741739920 [label=True]\n\t2368741808448 [label=\"Feature Fare == 10.5?\"\
+    ]\n\t2368741807008 [label=\"Prediction: 0\"]\n\t2368741808448 -> 2368741807008\
+    \ [label=True]\n\t2368741827392 [label=\"Feature Pclass == 2?\"]\n\t2368741810080\
+    \ [label=\"Prediction: 1\"]\n\t2368741827392 -> 2368741810080 [label=True]\n\t\
+    2368741829744 [label=\"Feature Fare == 27.7208?\"]\n\t2368741828976 [label=\"\
+    Prediction: 0\"]\n\t2368741829744 -> 2368741828976 [label=True]\n\t2368741856736\
+    \ [label=\"Feature Fare == 35.5?\"]\n\t2368741856352 [label=\"Prediction: 1\"\
+    ]\n\t2368741856736 -> 2368741856352 [label=True]\n\t2368741859184 [label=\"Feature\
+    \ Parch == 0?\"]\n\t2368741858320 [label=\"Prediction: 0\"]\n\t2368741859184 ->\
+    \ 2368741858320 [label=True]\n\t2368741857360 [label=\"Prediction: 1\"]\n\t2368741859184\
+    \ -> 2368741857360 [label=False]\n\t2368741856736 -> 2368741859184 [label=False]\n\
+    \t2368741829744 -> 2368741856736 [label=False]\n\t2368741827392 -> 2368741829744\
+    \ [label=False]\n\t2368741808448 -> 2368741827392 [label=False]\n\t2368741740064\
+    \ -> 2368741808448 [label=False]\n\t2368741737904 -> 2368741740064 [label=False]\n\
+    \t2368741707536 -> 2368741737904 [label=True]\n\t2368741707344 [label=\"Prediction:\
+    \ 0\"]\n\t2368741707536 -> 2368741707344 [label=False]\n\t2368741706096 -> 2368741707536\
+    \ [label=True]\n\t2368741706720 [label=\"Feature Fare == 15.2458?\"]\n\t2368741740016\
+    \ [label=\"Feature Parch == 1?\"]\n\t2368741737328 [label=\"Prediction: 1\"]\n\
+    \t2368741740016 -> 2368741737328 [label=True]\n\t2368741737472 [label=\"Prediction:\
+    \ 0\"]\n\t2368741740016 -> 2368741737472 [label=False]\n\t2368741706720 -> 2368741740016\
+    \ [label=True]\n\t2368741706432 [label=\"Prediction: 0\"]\n\t2368741706720 ->\
+    \ 2368741706432 [label=False]\n\t2368741706096 -> 2368741706720 [label=False]\n\
+    \t2368741644800 -> 2368741706096 [label=False]\n\t2368741642544 -> 2368741644800\
+    \ [label=False]\n\t2368741402848 -> 2368741642544 [label=True]\n\t2368741642688\
+    \ [label=\"Feature SibSp == 0?\"]\n\t2368741645520 [label=\"Feature Age == 14.0?\"\
+    ]\n\t2368741643408 [label=\"Prediction: 0\"]\n\t2368741645520 -> 2368741643408\
+    \ [label=True]\n\t2368741642640 [label=\"Prediction: 1\"]\n\t2368741645520 ->\
+    \ 2368741642640 [label=False]\n\t2368741642688 -> 2368741645520 [label=True]\n\
+    \t2368741645184 [label=\"Feature Fare == 21.075?\"]\n\t2368741707152 [label=\"\
+    Feature Fare == 16.7?\"]\n\t2368741707440 [label=\"Feature Age == 33.0?\"]\n\t\
+    2368741705952 [label=\"Prediction: 1\"]\n\t2368741707440 -> 2368741705952 [label=True]\n\
+    \t2368741706144 [label=\"Prediction: 0\"]\n\t2368741707440 -> 2368741706144 [label=False]\n\
+    \t2368741707152 -> 2368741707440 [label=True]\n\t2368741704272 [label=\"Prediction:\
+    \ 0\"]\n\t2368741707152 -> 2368741704272 [label=False]\n\t2368741645184 -> 2368741707152\
+    \ [label=True]\n\t2368741704368 [label=\"Feature SibSp == 5?\"]\n\t2368741704128\
+    \ [label=\"Prediction: 0\"]\n\t2368741704368 -> 2368741704128 [label=True]\n\t\
+    2368741703744 [label=\"Prediction: 1\"]\n\t2368741704368 -> 2368741703744 [label=False]\n\
+    \t2368741645184 -> 2368741704368 [label=False]\n\t2368741642688 -> 2368741645184\
+    \ [label=False]\n\t2368741402848 -> 2368741642688 [label=False]\n}\n"
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20217#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Sat, 23 Sep 2023 11:36:58 UTC"
 record: -1

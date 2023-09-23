@@ -6,29 +6,26 @@ from typing import Union
 from graphviz import Digraph
 from sklearn.metrics import confusion_matrix
 
-TRAIN_FILE_PATH = ".\\test\\data_stage8_train.csv"
-TEST_FILE_PATH = ".\\test\\data_stage8_test.csv"
+TRAIN_FILE_PATH = ".\\test\\data_stage9_train.csv"
+TEST_FILE_PATH = ".\\test\\data_stage9_test.csv"
 MAX_GINI = 1.0
-MINIMUM_SAMPLES = 1
+MINIMUM_SAMPLES = 74
 
 
 @dataclass
 class DecisionNode:
-    def __init__(self, feature_index: int, value: str, left: 'Union[DecisionNode, LeafNode]',
-                 right: 'Union[DecisionNode, LeafNode]', name: str, gini: float, float_type: bool):
-        self.gini = gini
-        self.feature_index = feature_index
-        self.value = value
-        self.left = left
-        self.right = right
-        self.name = name
-        self.float_type = float_type
+    feature_index: int
+    value: str
+    left: 'Union[DecisionNode, LeafNode]'
+    right: 'Union[DecisionNode, LeafNode]'
+    name: str
+    gini: float
+    float_type: bool
 
 
 @dataclass
 class LeafNode:
-    def __init__(self, prediction: int):
-        self.prediction = prediction
+    prediction: int
 
 
 def gini_impurity(array: pd.Series) -> float:
@@ -97,7 +94,7 @@ def construct_tree(df: pd.DataFrame):
             index = i
             value = column_value
 
-    print_results()
+    # print_results()
 
     float_type = df.iloc[:, index].dtype == 'float64'
 
@@ -125,20 +122,20 @@ def visualize_tree(node, df, parent_name='', graph=None):
 
 
 def predict(row, node, index):
-
     if index != -1:
-        print("Prediction for sample # {}".format(index))
+        # print("Prediction for sample # {}".format(index))
+        pass
     if isinstance(node, LeafNode):
-        print("\tPredicted label: {}".format(node.prediction))
+        # print("\tPredicted label: {}".format(node.prediction))
         return node.prediction
     elif not node.float_type and row.iloc[node.feature_index] == node.value:
-        print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
+        # print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
         return predict(row, node.left, -1)
     elif node.float_type and row.iloc[node.feature_index] <= node.value:
-        print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
+        # print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
         return predict(row, node.left, -1)
     else:
-        print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
+        # print("\tConsidering decision rule on feature {} with value {}".format(node.name, node.value))
         return predict(row, node.right, -1)
 
 
@@ -153,8 +150,11 @@ def main():
     test_df: pd.DataFrame = pd.read_csv(TEST_FILE_PATH)
     test_df.set_index(test_df.columns[0], inplace=True)
     predictions = test_df.apply(lambda row: predict(row, tree, row.name), axis=1)
-    # outcome: pd.Series = test_df.iloc[:, -1]
+    outcome: pd.Series = test_df.iloc[:, -1]
 
+    matrix = confusion_matrix(outcome, predictions)
+    print(round(matrix[1][1] / (matrix[1][0] + matrix[1][1]), 3),
+          round(matrix[0][0] / (matrix[0][0] + matrix[0][1]), 3))
 
     # graph = visualize_tree(tree, df)
     # graph.view()

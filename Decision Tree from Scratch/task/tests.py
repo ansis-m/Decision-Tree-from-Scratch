@@ -1,3 +1,3 @@
-from test.tests import TreeNumTest
+from test.tests import Eval2Test
 
-if __name__ == '__main__':    TreeNumTest().run_tests()
+if __name__ == '__main__':    Eval2Test().run_tests()
